@@ -16,9 +16,9 @@ spec:
         app: minecraft-server
     spec:
       volumes:
-      - name: minecraft-data
+      - name: nfs
         persistentVolumeClaim:
-          claimName: minecraft-data-pvc
+          claimName: nfs
       containers:
       - name: minecraft-server
         image: itzg/minecraft-server:latest
@@ -40,7 +40,7 @@ spec:
         - containerPort: {{ .Values.minecraft.port }}
           name: minecraft
         volumeMounts:
-          - name: minecraft-data
+          - name: nfs
             mountPath:  /data
         readinessProbe:
           exec:
